@@ -2,6 +2,7 @@ package com.example.Poll.service;
 
 import com.example.Poll.model.AnswerNumber;
 import com.example.Poll.model.Poll;
+import com.example.Poll.repository.AnswerRepositoryImpl;
 import com.example.Poll.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private AnswerRepositoryImpl answerRepository;
     @Override
     public void chooseAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
         if (userId != null && userService.getUserByUserId(userId) != null) {
@@ -32,7 +35,7 @@ public class AnswerServiceImpl implements AnswerService {
             if (answerNumber.toString() == "D") {
                 answer = poll.getFourth_answer();
             }
-            //answerRepository.chooseAnswer(pollRequest);
+            answerRepository.chooseAnswer(answer,pollId,userId);
         } else {
             System.out.println("you must register to answer the questions");
         }//end else

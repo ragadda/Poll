@@ -1,7 +1,7 @@
 package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.PollResponse;
+import com.example.Poll.model.QuestionResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,13 +14,13 @@ public interface PollRepository {
 
 
     public Poll getPollBypPollId(Integer pollId);
-    public List<Integer> howMonyUsersChooseThisPoll(Integer pollId);
-    public List<Integer> howMonyUsersAnswerToThisPoll(Integer pollId);
+    public List<Integer> getNumberOfUsersForEachOption(Integer pollId);
+    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId);
 
     Poll getPollByUserId(Integer userId);
 
     public List<Poll> getAllPollsByUserId(Integer userId);
     public List<String> getAllTheAnswersByUserId(Integer userId);
-    public List<PollResponse> getAllPollsAndUsersNumber();
+    public List<QuestionResponse> getAllPollsAndUsersNumber();
 
 }//end class

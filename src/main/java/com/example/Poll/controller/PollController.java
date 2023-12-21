@@ -1,7 +1,7 @@
 package com.example.Poll.controller;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.PollResponse;
+import com.example.Poll.model.QuestionResponse;
 import com.example.Poll.service.PollServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,38 +15,38 @@ public class PollController {
     @Autowired
     private PollServiceImpl pollService;
     @PostMapping(value ="/creat")
-    void createPoll(Poll poll){
+    void createPoll(@RequestBody Poll poll){
         pollService.createPoll(poll);
     }
 
     @PutMapping(value ="/update")
-    void updatePoll(Poll poll){
+    void updatePoll(@RequestBody Poll poll){
         pollService.createPoll(poll);
     }
     @DeleteMapping(value ="/delete")
-    void deletePoll(Integer pollId){
+    void deletePoll(@RequestParam Integer pollId){
         pollService.deletePoll(pollId);
     }
 
 
     @GetMapping(value = "/user_number_choose_poll")
-    List<Integer> howMonyUsersChooseThisPoll(Integer pollId){
-        return  pollService.howMonyUsersChooseThisPoll(pollId);
+    QuestionResponse getNumberOfUsersForEachOption(@RequestParam Integer pollId){
+        return  pollService.getNumberOfUsersForEachOption(pollId);
     }
     @GetMapping(value ="/user_number_answer_poll")
-    List<Integer> howMonyUsersAnswerToThisPoll(Integer pollId){
-        return  pollService.howMonyUsersAnswerToThisPoll(pollId);
+    List<Integer> getNumberOfUsersAnswerPoll( @RequestParam Integer pollId){
+        return  pollService.getNumberOfUsersAnswerPoll(pollId);
     }
     @GetMapping(value ="/all_polls")
-    List<Poll> getAllPollsByUserId(Integer userId){
+    List<Poll> getAllPollsByUserId(@RequestParam Integer userId){
         return  getAllPollsByUserId(userId);
     }
     @GetMapping(value ="/all_aswer")
-    List<String> getAllTheAnswersByUserId(Integer userId){
+    List<String> getAllTheAnswersByUserId(@RequestParam Integer userId){
         return  getAllTheAnswersByUserId(userId);
     }
     @GetMapping(value ="/all_polls_and_user_number")
-    List<PollResponse> getAllPollsAndUsersNumber(){
+    List<QuestionResponse> getAllPollsAndUsersNumber(){
         return  getAllPollsAndUsersNumber();
     }
 

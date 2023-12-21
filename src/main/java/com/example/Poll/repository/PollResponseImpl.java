@@ -1,7 +1,7 @@
 package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.PollResponse;
+import com.example.Poll.model.QuestionResponse;
 import com.example.Poll.repository.mapper.PollMapper;
 import com.example.Poll.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +45,12 @@ public class PollResponseImpl implements PollRepository {
     }
 
     @Override
-    public List<Integer> howMonyUsersChooseThisPoll(Integer pollId) {
+    public List<Integer> getNumberOfUsersForEachOption(Integer pollId) {
         return null;
     }
 
     @Override
-    public List<Integer> howMonyUsersAnswerToThisPoll(Integer pollId) {
+    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId) {
         return null;
     }
 
@@ -77,7 +77,7 @@ public class PollResponseImpl implements PollRepository {
     }
 
     @Override
-    public List<PollResponse> getAllPollsAndUsersNumber() {
+    public List<QuestionResponse> getAllPollsAndUsersNumber() {
         return null;
     }
 

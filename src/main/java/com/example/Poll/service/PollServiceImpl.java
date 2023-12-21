@@ -1,7 +1,7 @@
 package com.example.Poll.service;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.PollResponse;
+import com.example.Poll.model.QuestionResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,12 +29,12 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public List<Integer> howMonyUsersChooseThisPoll(Integer pollId) {
+    public QuestionResponse getNumberOfUsersForEachOption(Integer pollId) {
         return null;
     }
 
     @Override
-    public List<Integer> howMonyUsersAnswerToThisPoll(Integer pollId) {
+    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId) {
         return null;
     }
 
@@ -49,7 +49,7 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public List<PollResponse> getAllPollsAndUsersNumber() {
+    public List<QuestionResponse> getAllPollsAndUsersNumber() {
         return null;
     }
 }//endclass

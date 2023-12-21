@@ -1,7 +1,7 @@
 package com.example.Poll.service;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.PollResponse;
+import com.example.Poll.model.QuestionResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public interface PollService {
 
 
     public Poll getPollBypPollId(Integer pollId);
-    public List<Integer> howMonyUsersChooseThisPoll(Integer pollId);
-    public List<Integer> howMonyUsersAnswerToThisPoll(Integer pollId);
+    public QuestionResponse getNumberOfUsersForEachOption(Integer pollId);
+    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
     public List<String> getAllTheAnswersByUserId(Integer userId);
-    public List<PollResponse> getAllPollsAndUsersNumber();
+    public List<QuestionResponse> getAllPollsAndUsersNumber();
 
 
 
