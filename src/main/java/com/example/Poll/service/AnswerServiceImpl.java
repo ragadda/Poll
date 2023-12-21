@@ -15,24 +15,24 @@ public class AnswerServiceImpl implements AnswerService {
     private PollServiceImpl pollService;
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private AnswerRepositoryImpl answerRepository;
+
+
     @Override
     public void chooseAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
-        if (userId != null && userService.getUserByUserId(userId) != null) {
+        if (userId != null){//&& userService.getUserByUserId(userId) != null) {
             String answer = "";
             Poll poll =pollService.getPollBypPollId(pollId);
-            if (answerNumber.toString() == "A") {
+            if (answerNumber == AnswerNumber.A) {
                 answer = poll.getFirst_answer();
             }
-            if (answerNumber.toString() == "B") {
+            if (answerNumber== AnswerNumber.B) {
                 answer = poll.getSecond_answer();
             }
-            if (answerNumber.toString() == "C") {
+            if (answerNumber== AnswerNumber.C) {
                 answer = poll.getThird_answer();
             }
-            if (answerNumber.toString() == "D") {
+            if (answerNumber== AnswerNumber.D) {
                 answer = poll.getFourth_answer();
             }
             answerRepository.chooseAnswer(answer,pollId,userId);
@@ -41,18 +41,34 @@ public class AnswerServiceImpl implements AnswerService {
         }//end else
     }//end chooseAnswer
 
+
     @Override
     public void updateAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
-
-    }
+        String answer = "";
+        Poll poll =pollService.getPollBypPollId(pollId);
+        if (answerNumber == AnswerNumber.A) {
+            answer = poll.getFirst_answer();
+        }
+        if (answerNumber== AnswerNumber.B) {
+            answer = poll.getSecond_answer();
+        }
+        if (answerNumber== AnswerNumber.C) {
+            answer = poll.getThird_answer();
+        }
+        if (answerNumber== AnswerNumber.D) {
+            answer = poll.getFourth_answer();
+        }
+        answerRepository.updateAnswer(answer,pollId,userId);
+    }//end updateAnswer
 
     @Override
     public void deleteAllUserAnswers(Integer userId) {
-
+        //צריך לבדוק אם היוזר קיים
+        answerRepository.deleteAllUserAnswers(userId);
     }
 
     @Override
     public void deleteUserAnswerbyPollId(Integer userId, Integer pollId) {
-
+        answerRepository.deleteUserAnswerbyPollId(userId,pollId);
     }
 }//endclass

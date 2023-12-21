@@ -2,12 +2,20 @@ package com.example.Poll.service;
 
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.QuestionResponse;
+import com.example.Poll.repository.PollRepositoryImpl;
+import com.example.Poll.repository.mapper.PollMapper;
+import com.example.Poll.utils.Constant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class PollServiceImpl implements PollService {
+    @Autowired
+    private PollRepositoryImpl pollRepository;
+
     @Override
     public void createPoll(Poll poll) {
 
@@ -25,7 +33,7 @@ public class PollServiceImpl implements PollService {
 
     @Override
     public Poll getPollBypPollId(Integer pollId) {
-        return null;
+        return  pollRepository.getPollBypPollId(pollId);
     }
 
     @Override

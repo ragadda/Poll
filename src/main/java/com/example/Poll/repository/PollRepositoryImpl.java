@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PollResponseImpl implements PollRepository {
+public class PollRepositoryImpl implements PollRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -41,7 +41,8 @@ public class PollResponseImpl implements PollRepository {
 
     @Override
     public Poll getPollBypPollId(Integer pollId) {
-        return null;
+        String sql = "SELECT * FROM "+ Constant.POLL_TABLE_NAME +" WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql,new PollMapper(),pollId);
     }
 
     @Override
@@ -57,8 +58,7 @@ public class PollResponseImpl implements PollRepository {
 
     @Override
     public Poll getPollByUserId(Integer userId) {
-        String sql = "SELECT * FROM "+ Constant.POLL_TABLE_NAME +" WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql,new PollMapper(),userId);
+        return null;
     }
 
     @Override

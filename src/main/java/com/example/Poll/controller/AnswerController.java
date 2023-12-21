@@ -11,24 +11,26 @@ public class AnswerController {
     @Autowired
     private AnswerServiceImpl answerService;
     @PostMapping( value = "/choose")
-    public void chooseAnswer(AnswerNumber answerNumber,Integer userId,Integer pollId){
-
+    public void chooseAnswer(@RequestParam(value = "answer_number") AnswerNumber answerNumber,@RequestParam(value = "user_id")
+    Integer userId,@RequestParam(value = "poll_id") Integer pollId){
+        answerService.chooseAnswer(answerNumber,userId,pollId);
     }
 
 
     @PutMapping(value = "/update_answer")
-    public  void updateAnswer(AnswerNumber answerNumber,Integer userId,Integer pollId){
-
+    public  void updateAnswer(@RequestParam(value = "answer_number") AnswerNumber answerNumber,@RequestParam(value = "user_id")
+    Integer userId,@RequestParam(value = "poll_id") Integer pollId){
+        answerService.updateAnswer(answerNumber,userId,pollId);
     }
 
     @DeleteMapping(value = "/delete_all_answers")
-    public void deleteAllUserAnswers(Integer userId){
-
+    public void deleteAllUserAnswers(@RequestParam(value = "user_id") Integer userId){
+        answerService.deleteAllUserAnswers(userId);
     }
 
     @DeleteMapping(value = "/delete_answer")
-    public void deleteUserAnswerbyPollId(Integer userId,Integer pollId){
-
+    public void deleteUserAnswerbyPollId(@RequestParam(value = "user_id")Integer userId,@RequestParam(value = "poll_id")Integer pollId){
+        answerService.deleteUserAnswerbyPollId(userId,pollId);
     }
 
 

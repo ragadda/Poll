@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnswerRepository {
     public void chooseAnswer(String answer, Integer userId, Integer pollId);
-    public  void updateAnswer(AnswerNumber answerNumber,Integer userId,Integer pollId);
+    public  void updateAnswer(String answer,Integer userId,Integer pollId);
 
     public void deleteAllUserAnswers(Integer userId);
 

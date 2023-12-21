@@ -19,17 +19,22 @@ public class AnswerRepositoryImpl implements  AnswerRepository {
     }
 
     @Override
-    public void updateAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
-
+    public void updateAnswer(String answer, Integer userId, Integer pollId) {
+        String sql = "UPDATE "+ Constant.ANSWER_TABLE_NAME +" SET answer = ? WHERE poll_id = ? AND user_id=?";
+        jdbcTemplate.update(sql,answer,pollId,userId);
     }
 
     @Override
     public void deleteAllUserAnswers(Integer userId) {
-
+        String sql = "DELETE FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE user_id = ?";
+        jdbcTemplate.update(sql,userId);
     }
 
     @Override
     public void deleteUserAnswerbyPollId(Integer userId, Integer pollId) {
-
+        String sql = "DELETE FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE user_id = ? AND poll_id=?";
+        jdbcTemplate.update(sql,userId,pollId);
     }
+
+
 }//endclass
