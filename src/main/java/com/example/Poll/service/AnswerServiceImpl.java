@@ -21,20 +21,8 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void chooseAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
         if (userId != null){//&& userService.getUserByUserId(userId) != null) {
-            String answer = "";
             Poll poll =pollService.getPollBypPollId(pollId);
-            if (answerNumber == AnswerNumber.A) {
-                answer = poll.getFirst_answer();
-            }
-            if (answerNumber== AnswerNumber.B) {
-                answer = poll.getSecond_answer();
-            }
-            if (answerNumber== AnswerNumber.C) {
-                answer = poll.getThird_answer();
-            }
-            if (answerNumber== AnswerNumber.D) {
-                answer = poll.getFourth_answer();
-            }
+            String answer=pollService.getAnswerByAnswerNumber(answerNumber,poll);
             answerRepository.chooseAnswer(answer,pollId,userId);
         } else {
             System.out.println("you must register to answer the questions");
@@ -44,20 +32,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void updateAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
-        String answer = "";
         Poll poll =pollService.getPollBypPollId(pollId);
-        if (answerNumber == AnswerNumber.A) {
-            answer = poll.getFirst_answer();
-        }
-        if (answerNumber== AnswerNumber.B) {
-            answer = poll.getSecond_answer();
-        }
-        if (answerNumber== AnswerNumber.C) {
-            answer = poll.getThird_answer();
-        }
-        if (answerNumber== AnswerNumber.D) {
-            answer = poll.getFourth_answer();
-        }
+        String answer=pollService.getAnswerByAnswerNumber(answerNumber,poll);
         answerRepository.updateAnswer(answer,pollId,userId);
     }//end updateAnswer
 

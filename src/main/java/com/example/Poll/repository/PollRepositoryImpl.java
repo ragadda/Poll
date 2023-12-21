@@ -29,15 +29,42 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Override
     public void updatePoll(Poll poll) {
-
+        String sql = "UPDATE "+ Constant.POLL_TABLE_NAME +" SET title = ? first_answer=? secondd_answer=? " +
+                "third_answer=? fourth_answer=?";
+        jdbcTemplate.update(sql,poll.getTitle(),poll.getFirst_answer(),poll.getSecond_answer(),poll.getSecond_answer(),
+                poll.getThird_answer(),poll.getFourth_answer());
     }
 
     @Override
     public void deletePoll(Integer id) {
-        System.out.println("Customer with id = " + id + " was deleted");
         String sql = "DELETE FROM "+ Constant.POLL_TABLE_NAME+" WHERE id = ?";
-        jdbcTemplate.update(sql,id);
+         jdbcTemplate.update(sql,id);
     }
+
+    @Override
+    public void updateQuestion(Integer id,String title) {
+        String sql = "UPDATE "+ Constant.POLL_TABLE_NAME +" SET title = ? WHERE poll_id = ?";
+        jdbcTemplate.update(sql,title,id);
+    }
+
+    @Override
+    public Integer getNumberOfUserByAnswerNumber(String answer) {
+        String sql="SELECT COUNT(answer) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE answer=?";
+        return jdbcTemplate.queryForObject(sql, Integer.class,answer);
+    }
+
+    @Override
+    public Integer gerQuestionsNumber() {
+        String sql="SELECT MAX(id) FROM"+ Constant.POLL_TABLE_NAME;
+        return jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+
+    @Override
+    public Integer ifQuestionIsAnsweredByUser(Integer pollId) {
+        String sql = "SELECT * FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql,Integer.class,pollId);
+    }
+
 
     @Override
     public Poll getPollBypPollId(Integer pollId) {
@@ -45,21 +72,20 @@ public class PollRepositoryImpl implements PollRepository {
         return jdbcTemplate.queryForObject(sql,new PollMapper(),pollId);
     }
 
-    @Override
-    public List<Integer> getNumberOfUsersForEachOption(Integer pollId) {
-        return null;
-    }
 
-    @Override
-    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId) {
-        return null;
-    }
+
+
+
+
+
 
 
     @Override
-    public Poll getPollByUserId(Integer userId) {
-        return null;
+    public Integer getNumberOfUsersAnswerPoll(Integer pollId) {
+        String sql="SELECT COUNT(poll_id) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE poll_id=?";
+        return jdbcTemplate.queryForObject(sql, Integer.class,pollId);
     }
+
 
     @Override
     public List<Poll> getAllPollsByUserId(Integer userId) {
@@ -72,13 +98,12 @@ public class PollRepositoryImpl implements PollRepository {
     }
 
     @Override
-    public List<String> getAllTheAnswersByUserId(Integer userId) {
-        return null;
+    public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId) {
+        String sql="SELECT COUNT(user_id) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE user_id=?";
+        return jdbcTemplate.queryForObject(sql, Integer.class,userId);
     }
 
-    @Override
-    public List<QuestionResponse> getAllPollsAndUsersNumber() {
-        return null;
-    }
+
+
 
 }//endclass

@@ -1,7 +1,6 @@
 package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.QuestionResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,15 +11,17 @@ public interface PollRepository {
     public void updatePoll(Poll poll);
     public void deletePoll(Integer id);
 
+    public  void updateQuestion(Integer id,String title);
+    public Integer getNumberOfUserByAnswerNumber(String answer);
+    public Integer gerQuestionsNumber();
+    public Integer ifQuestionIsAnsweredByUser(Integer pollId);
+
+
 
     public Poll getPollBypPollId(Integer pollId);
-    public List<Integer> getNumberOfUsersForEachOption(Integer pollId);
-    public List<Integer> getNumberOfUsersAnswerPoll(Integer pollId);
-
-    Poll getPollByUserId(Integer userId);
-
+    public Integer getNumberOfUsersAnswerPoll(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
-    public List<String> getAllTheAnswersByUserId(Integer userId);
-    public List<QuestionResponse> getAllPollsAndUsersNumber();
+    public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId);
+
 
 }//end class

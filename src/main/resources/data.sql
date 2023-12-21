@@ -16,7 +16,7 @@ CREATE TABLE answer(
     poll_id int NOT NULL ,
     user_id int NOT NULL ,
     answer VARCHAR(255) NOT NULL ,
-    PRIMARY KEY (id),
+    PRIMARY KEY (user_id,poll_id),
     FOREIGN KEY (poll_id) REFERENCES poll(id)
 );
 

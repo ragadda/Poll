@@ -24,30 +24,34 @@ public class PollController {
         pollService.createPoll(poll);
     }
     @DeleteMapping(value ="/delete")
-    void deletePoll(@RequestParam Integer pollId){
+    void deletePoll(@RequestParam(value = "poll_id") Integer pollId){
         pollService.deletePoll(pollId);
     }
 
+    @PutMapping(value = "update_question")
+    public void updateQuestion(@RequestParam Integer id,@RequestParam String title){
+        pollService.updateQuestion(id,title);
+    }
 
     @GetMapping(value = "/user_number_choose_poll")
-    QuestionResponse getNumberOfUsersForEachOption(@RequestParam Integer pollId){
+    QuestionResponse getNumberOfUsersForEachOption(@RequestParam(value = "poll_id") Integer pollId){
         return  pollService.getNumberOfUsersForEachOption(pollId);
     }
     @GetMapping(value ="/user_number_answer_poll")
-    List<Integer> getNumberOfUsersAnswerPoll( @RequestParam Integer pollId){
+    Integer getNumberOfUsersAnswerPoll( @RequestParam(value = "poll_id") Integer pollId){
         return  pollService.getNumberOfUsersAnswerPoll(pollId);
     }
     @GetMapping(value ="/all_polls")
-    List<Poll> getAllPollsByUserId(@RequestParam Integer userId){
-        return  getAllPollsByUserId(userId);
+    List<Poll> getAllPollsByUserId(@RequestParam(value = "user_id") Integer userId){
+        return  pollService.getAllPollsByUserId(userId);
     }
-    @GetMapping(value ="/all_aswer")
-    List<String> getAllTheAnswersByUserId(@RequestParam Integer userId){
-        return  getAllTheAnswersByUserId(userId);
+    @GetMapping(value ="/answered_question")
+    Integer getNumberOfQuestionThisUserAnsweredTo(@RequestParam(value = "user_id") Integer userId){
+        return  pollService.getNumberOfQuestionThisUserAnsweredTo(userId);
     }
     @GetMapping(value ="/all_polls_and_user_number")
-    List<QuestionResponse> getAllPollsAndUsersNumber(){
-        return  getAllPollsAndUsersNumber();
+    List<QuestionResponse>  getAllPollsAndUsersNumber(){
+        return  pollService.getAllPollsAndUsersNumber();
     }
 
 
