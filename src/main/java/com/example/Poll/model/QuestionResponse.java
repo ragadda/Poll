@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class QuestionResponse {
     @JsonProperty(value = "question_id")
     private Integer questionId;
-    @JsonProperty(value = "option a")
+    @JsonProperty(value = "option_a")
     private Integer a;
-    @JsonProperty(value = "option b")
+    @JsonProperty(value = "option_b")
     private Integer b;
-    @JsonProperty(value = "option c")
+    @JsonProperty(value = "option_c")
     private Integer c;
-    @JsonProperty(value = "option d")
+    @JsonProperty(value = "option_d")
     private Integer d;
 
 
