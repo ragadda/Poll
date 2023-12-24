@@ -14,8 +14,7 @@ import java.util.List;
 public class PollServiceImpl implements PollService {
     @Autowired
     private PollRepositoryImpl pollRepository;
-    @Autowired
-    private AnswerServiceImpl answerService;
+
 
     @Override
     public void createPoll(Poll poll) {
@@ -56,14 +55,14 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public Poll getPollBypPollId(Integer pollId) {
-        return  pollRepository.getPollBypPollId(pollId);
+    public Poll getPollByPollId(Integer pollId) {
+        return  pollRepository.getPollByPollId(pollId);
     }
 
     @Override
     public QuestionResponse getNumberOfUsersForEachOption(Integer pollId) {
         Integer questionId=pollId;
-        Poll poll=getPollBypPollId(pollId);
+        Poll poll= getPollByPollId(pollId);
         String answerA=getAnswerByAnswerNumber(AnswerNumber.A,poll);
         Integer a=pollRepository.getNumberOfUserByAnswerNumber(answerA);
 
@@ -96,10 +95,11 @@ public class PollServiceImpl implements PollService {
 
     @Override
     public List<QuestionResponse>  getAllPollsAndUsersNumber() {
-        Integer questionsNumber=pollRepository.gerQuestionsNumber();
+        Integer questionsNumber=pollRepository.getQuestionsNumber();
         List<QuestionResponse> questionResponseList=new ArrayList<>();
-        for (Integer i=0;i<questionsNumber;i++){
-            if(pollRepository.getPollBypPollId(i)!=null){
+        //System.out.println(questionsNumber);
+        for (Integer i=1;i<=questionsNumber;i++){
+            if(pollRepository.getPollByPollId(i)!=null){
                 if (pollRepository.ifQuestionIsAnsweredByUser(i)!=null){
                     questionResponseList.add(getNumberOfUsersForEachOption(i));
                 }

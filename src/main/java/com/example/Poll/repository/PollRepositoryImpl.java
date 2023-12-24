@@ -49,25 +49,25 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Override
     public Integer getNumberOfUserByAnswerNumber(String answer) {
-        String sql="SELECT COUNT(answer) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE answer=?";
+        String sql=" SELECT COUNT(answer) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE answer=?";
         return jdbcTemplate.queryForObject(sql, Integer.class,answer);
     }
 
     @Override
-    public Integer gerQuestionsNumber() {
-        String sql="SELECT MAX(id) FROM"+ Constant.POLL_TABLE_NAME;
+    public Integer getQuestionsNumber() {
+        String sql="SELECT MAX(id) FROM "+ Constant.POLL_TABLE_NAME;
         return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
     public Integer ifQuestionIsAnsweredByUser(Integer pollId) {
-        String sql = "SELECT * FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE id = ?";
+        String sql = "SELECT COUNT(poll_id) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE poll_id = ?";
         return jdbcTemplate.queryForObject(sql,Integer.class,pollId);
     }
 
 
     @Override
-    public Poll getPollBypPollId(Integer pollId) {
+    public Poll getPollByPollId(Integer pollId) {
         String sql = "SELECT * FROM "+ Constant.POLL_TABLE_NAME +" WHERE id = ?";
         return jdbcTemplate.queryForObject(sql,new PollMapper(),pollId);
     }
@@ -82,7 +82,7 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Override
     public Integer getNumberOfUsersAnswerPoll(Integer pollId) {
-        String sql="SELECT COUNT(poll_id) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE poll_id=?";
+        String sql="SELECT COUNT(poll_id) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE poll_id=?";
         return jdbcTemplate.queryForObject(sql, Integer.class,pollId);
     }
 
@@ -90,16 +90,16 @@ public class PollRepositoryImpl implements PollRepository {
     @Override
     public List<Poll> getAllPollsByUserId(Integer userId) {
         String sql = "SELECT *" +
-                " FROM" + Constant.POLL_TABLE_NAME +
-                "RIGHT JOIN" + Constant.ANSWER_TABLE_NAME +
-                " ON " + Constant.POLL_TABLE_NAME+".id =" + Constant.ANSWER_TABLE_NAME +".poll_id"+
-                "WHERE user_id=?";
+                " FROM " + Constant.POLL_TABLE_NAME +
+                " INNER JOIN " + Constant.ANSWER_TABLE_NAME +
+                " ON " + Constant.POLL_TABLE_NAME+".id =" + Constant.ANSWER_TABLE_NAME +".user_id"+
+                " WHERE user_id=?";
         return jdbcTemplate.query(sql,new PollMapper(),userId);
     }
 
     @Override
     public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId) {
-        String sql="SELECT COUNT(user_id) FROM"+ Constant.ANSWER_TABLE_NAME +"WHERE user_id=?";
+        String sql="SELECT COUNT(user_id) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE user_id=?";
         return jdbcTemplate.queryForObject(sql, Integer.class,userId);
     }
 

@@ -15,7 +15,7 @@ public interface PollService {
     public void updateQuestion(Integer id,String title);
 
     public String getAnswerByAnswerNumber(AnswerNumber answerNumber,Poll poll);
-    public Poll getPollBypPollId(Integer pollId);
+    public Poll getPollByPollId(Integer pollId);
 
     public QuestionResponse getNumberOfUsersForEachOption(Integer pollId);
     public Integer getNumberOfUsersAnswerPoll(Integer pollId);

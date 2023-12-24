@@ -1,10 +1,17 @@
 package com.example.Poll.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class QuestionResponse {
+    @JsonProperty(value = "question_id")
     private Integer questionId;
+    @JsonProperty(value = "option a")
     private Integer a;
+    @JsonProperty(value = "option b")
     private Integer b;
+    @JsonProperty(value = "option c")
     private Integer c;
+    @JsonProperty(value = "option d")
     private Integer d;
 
 

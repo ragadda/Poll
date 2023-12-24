@@ -13,12 +13,12 @@ public interface PollRepository {
 
     public  void updateQuestion(Integer id,String title);
     public Integer getNumberOfUserByAnswerNumber(String answer);
-    public Integer gerQuestionsNumber();
+    public Integer getQuestionsNumber();
     public Integer ifQuestionIsAnsweredByUser(Integer pollId);
 
 
 
-    public Poll getPollBypPollId(Integer pollId);
+    public Poll getPollByPollId(Integer pollId);
     public Integer getNumberOfUsersAnswerPoll(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
     public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId);
