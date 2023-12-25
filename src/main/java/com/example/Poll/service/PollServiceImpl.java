@@ -2,7 +2,9 @@ package com.example.Poll.service;
 
 import com.example.Poll.model.AnswerNumber;
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.QuestionResponse;
+import com.example.Poll.model.Response.QuestionResponse;
+import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.repository.PollRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,10 +80,6 @@ public class PollServiceImpl implements PollService {
          return new QuestionResponse(questionId,a,b,c,d);
     }
 
-    @Override
-    public Integer getNumberOfUsersAnswerPoll(Integer pollId) {
-        return pollRepository.getNumberOfUsersAnswerPoll(pollId);
-    }
 
     @Override
     public List<Poll> getAllPollsByUserId(Integer userId) {
@@ -89,8 +87,8 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId) {
-        return pollRepository.getNumberOfQuestionThisUserAnsweredTo(userId);
+    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId) {
+        return pollRepository.getQuestionsNumberByUserId(userId);
     }
 
     @Override
@@ -106,5 +104,10 @@ public class PollServiceImpl implements PollService {
             }
         }//endfor
         return questionResponseList;
+    }
+
+    @Override
+    public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId) {
+        return pollRepository.getTotalAnswersByPollId(pollId);
     }
 }//endclass

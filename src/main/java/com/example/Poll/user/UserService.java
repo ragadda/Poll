@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 )
 
 public interface UserService {
-    @GetMapping(value = "/by_id")
-     public User getUserByUserId(@RequestParam Integer userId);
+    @GetMapping(path = "/by_id")
+     public User getUserByUserId(@RequestParam(value = "user_id") Integer userId);
+
 }//end class

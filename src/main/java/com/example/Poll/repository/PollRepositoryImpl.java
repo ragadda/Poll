@@ -1,7 +1,8 @@
 package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.QuestionResponse;
+import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.repository.mapper.PollMapper;
 import com.example.Poll.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,25 +66,18 @@ public class PollRepositoryImpl implements PollRepository {
         return jdbcTemplate.queryForObject(sql,Integer.class,pollId);
     }
 
+    @Override
+    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId) {
+        String sql = "SELECT COUNT(user_id) FROM " + Constant.ANSWER_TABLE_NAME + " WHERE user_id=?";
+        Integer questionsNum = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+        return new UserQuestionsResponse(userId, questionsNum);
+    }
+
 
     @Override
     public Poll getPollByPollId(Integer pollId) {
         String sql = "SELECT * FROM "+ Constant.POLL_TABLE_NAME +" WHERE id = ?";
         return jdbcTemplate.queryForObject(sql,new PollMapper(),pollId);
-    }
-
-
-
-
-
-
-
-
-
-    @Override
-    public Integer getNumberOfUsersAnswerPoll(Integer pollId) {
-        String sql="SELECT COUNT(poll_id) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE poll_id=?";
-        return jdbcTemplate.queryForObject(sql, Integer.class,pollId);
     }
 
 
@@ -98,12 +92,11 @@ public class PollRepositoryImpl implements PollRepository {
     }
 
     @Override
-    public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId) {
-        String sql="SELECT COUNT(user_id) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE user_id=?";
-        return jdbcTemplate.queryForObject(sql, Integer.class,userId);
+    public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId) {
+        String sql="SELECT COUNT(answer) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE poll_id=?";
+        Integer answersNum=jdbcTemplate.queryForObject(sql, Integer.class,pollId);
+        return new TotalQuestionAnswersResponse(pollId,answersNum);
     }
-
-
 
 
 }//endclass

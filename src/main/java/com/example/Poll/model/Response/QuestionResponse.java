@@ -1,4 +1,4 @@
-package com.example.Poll.model;
+package com.example.Poll.model.Response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

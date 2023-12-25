@@ -2,7 +2,9 @@ package com.example.Poll.service;
 
 import com.example.Poll.model.AnswerNumber;
 import com.example.Poll.model.Poll;
-import com.example.Poll.model.QuestionResponse;
+import com.example.Poll.model.Response.QuestionResponse;
+import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.UserQuestionsResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +18,12 @@ public interface PollService {
 
     public String getAnswerByAnswerNumber(AnswerNumber answerNumber,Poll poll);
     public Poll getPollByPollId(Integer pollId);
-
-    public QuestionResponse getNumberOfUsersForEachOption(Integer pollId);
-    public Integer getNumberOfUsersAnswerPoll(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
-    public Integer getNumberOfQuestionThisUserAnsweredTo(Integer userId);
-    public List<QuestionResponse>  getAllPollsAndUsersNumber();
 
+    public QuestionResponse getNumberOfUsersForEachOption(Integer pollId);//Return how many users choose each ofthe question options
+    public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId);//Return how many users answer to this question in total
+    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId);//Return how many questions this user answered to
+    public List<QuestionResponse>  getAllPollsAndUsersNumber();//Return all questions and for each question how many users chooseeach of the question options.
 
 
 }//ensclass
