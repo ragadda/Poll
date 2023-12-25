@@ -28,4 +28,5 @@ VALUES ('aaa','aa','ab','ac','ad'),
 INSERT INTO answer (poll_id, user_id, answer)
 VALUES (1,1,'aa'),
        (1,2,'ba'),
+       (3,2,'ba'),
        (2,3,'aa');

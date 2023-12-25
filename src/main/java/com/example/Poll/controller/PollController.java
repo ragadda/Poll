@@ -3,6 +3,7 @@ package com.example.Poll.controller;
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.Response.QuestionResponse;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.service.PollServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,17 @@ public class PollController {
         return  pollService.getAllPollsByUserId(userId);
     }
     @GetMapping(value ="/answered_question")
-    UserQuestionsResponse getNumberOfQuestionThisUserAnsweredTo(@RequestParam(value = "user_id") Integer userId){
+    QuestionsNumberResponse getQuestionsNumberByUserId(@RequestParam(value = "user_id") Integer userId){
         return  pollService.getQuestionsNumberByUserId(userId);
     }
     @GetMapping(value ="/all_polls_and_user_number")
     List<QuestionResponse>  getAllPollsAndUsersNumber(){
         return  pollService.getAllPollsAndUsersNumber();
+    }
+
+    @GetMapping(value = "/user_answers")
+    List<UserQuestionsResponse> getUserAnswer( @RequestParam(value = "user_id") Integer userId){
+        return pollService.getUserAnswer(userId);
     }
 
 

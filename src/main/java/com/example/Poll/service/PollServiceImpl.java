@@ -4,6 +4,7 @@ import com.example.Poll.model.AnswerNumber;
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.Response.QuestionResponse;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.repository.PollRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import java.util.List;
 public class PollServiceImpl implements PollService {
     @Autowired
     private PollRepositoryImpl pollRepository;
-
 
     @Override
     public void createPoll(Poll poll) {
@@ -86,8 +86,9 @@ public class PollServiceImpl implements PollService {
         return pollRepository.getAllPollsByUserId(userId);
     }
 
+
     @Override
-    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId) {
+    public QuestionsNumberResponse getQuestionsNumberByUserId(Integer userId) {
         return pollRepository.getQuestionsNumberByUserId(userId);
     }
 
@@ -104,6 +105,20 @@ public class PollServiceImpl implements PollService {
             }
         }//endfor
         return questionResponseList;
+    }
+
+    @Override
+    public List<UserQuestionsResponse> getUserAnswer(Integer userId) {
+        List<Poll> userPolls=pollRepository.getAllPollsByUserId(userId);
+        List<UserQuestionsResponse> userQuestionsResponses=new ArrayList<>();
+        userPolls.forEach(poll -> {
+            Integer pollId=poll.getPollId();
+            String answer= pollRepository.getUserAnswer(userId,pollId);
+            UserQuestionsResponse userQuestionsResponse=new UserQuestionsResponse(userId,pollId,answer);
+            userQuestionsResponses.add(userQuestionsResponse);
+        });
+
+        return userQuestionsResponses;
     }
 
     @Override

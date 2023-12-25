@@ -1,8 +1,12 @@
 package com.example.Poll.model.Response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TotalQuestionAnswersResponse {
 
+    @JsonProperty(value = "question_id")
     private Integer questionId;
+    @JsonProperty(value = "answeres_number")
     private Integer answersNum;//how many users answer to question in total
 
     public TotalQuestionAnswersResponse(Integer questionId, Integer answersNum) {

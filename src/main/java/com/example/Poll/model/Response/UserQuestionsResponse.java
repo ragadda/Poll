@@ -1,13 +1,22 @@
 package com.example.Poll.model.Response;
 
-public class UserQuestionsResponse {
-    private Integer userId;
-    private Integer questionsNum;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public UserQuestionsResponse(Integer userId, Integer questionsNum) {
+public class UserQuestionsResponse {
+
+    @JsonProperty(value = "user_id")
+    private Integer userId;
+    @JsonProperty(value = "question_id")
+    private Integer questionId;
+
+    private String answer;
+
+    public UserQuestionsResponse(Integer userId, Integer questionId, String answer) {
         this.userId = userId;
-        this.questionsNum = questionsNum;
+        this.questionId = questionId;
+        this.answer = answer;
     }
+
 
     public Integer getUserId() {
         return userId;
@@ -17,11 +26,19 @@ public class UserQuestionsResponse {
         this.userId = userId;
     }
 
-    public Integer getQuestionsNum() {
-        return questionsNum;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestionsNum(Integer questionsNum) {
-        this.questionsNum = questionsNum;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }//end class

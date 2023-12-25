@@ -2,6 +2,7 @@ package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +19,12 @@ public interface PollRepository {
     public Integer getQuestionsNumber();
     public Integer ifQuestionIsAnsweredByUser(Integer pollId);
 
-    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId);
+
+
+    public QuestionsNumberResponse getQuestionsNumberByUserId(Integer userId);
     public Poll getPollByPollId(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
     public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId);
-
+    public String getUserAnswer(Integer userId, Integer pollId);
 
 }//end class

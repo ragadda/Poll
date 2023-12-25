@@ -4,6 +4,7 @@ import com.example.Poll.model.AnswerNumber;
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.Response.QuestionResponse;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public interface PollService {
 
     public QuestionResponse getNumberOfUsersForEachOption(Integer pollId);//Return how many users choose each ofthe question options
     public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId);//Return how many users answer to this question in total
-    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId);//Return how many questions this user answered to
+    public QuestionsNumberResponse getQuestionsNumberByUserId(Integer userId);//Return how many questions this user answered to
     public List<QuestionResponse>  getAllPollsAndUsersNumber();//Return all questions and for each question how many users chooseeach of the question options.
-
+    public List<UserQuestionsResponse> getUserAnswer(Integer userId) ;//Return the user answer to each question he submitted
 
 }//ensclass

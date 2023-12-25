@@ -2,8 +2,10 @@ package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
+import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.repository.mapper.PollMapper;
+import com.example.Poll.service.AnswerServiceImpl;
 import com.example.Poll.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +18,7 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Override
     public void createPoll(Poll poll) {
         String sql = "INSERT INTO " + Constant.POLL_TABLE_NAME + " (title,first_answer,secondd_answer,third_answer,fourth_answer) VALUES ( ?,?,?,?,?)";
@@ -67,10 +70,10 @@ public class PollRepositoryImpl implements PollRepository {
     }
 
     @Override
-    public UserQuestionsResponse getQuestionsNumberByUserId(Integer userId) {
+    public QuestionsNumberResponse getQuestionsNumberByUserId(Integer userId) {
         String sql = "SELECT COUNT(user_id) FROM " + Constant.ANSWER_TABLE_NAME + " WHERE user_id=?";
         Integer questionsNum = jdbcTemplate.queryForObject(sql, Integer.class, userId);
-        return new UserQuestionsResponse(userId, questionsNum);
+        return new QuestionsNumberResponse(userId, questionsNum);
     }
 
 
@@ -96,6 +99,14 @@ public class PollRepositoryImpl implements PollRepository {
         String sql="SELECT COUNT(answer) FROM "+ Constant.ANSWER_TABLE_NAME +" WHERE poll_id=?";
         Integer answersNum=jdbcTemplate.queryForObject(sql, Integer.class,pollId);
         return new TotalQuestionAnswersResponse(pollId,answersNum);
+    }
+
+
+    @Override
+    public String getUserAnswer(Integer userId, Integer poll_id) {
+        //String sql = "SELECT answer FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ? AND poll_id = ?";
+        String sql = "SELECT answer FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ?";
+        return jdbcTemplate.queryForObject(sql,String.class,userId);
     }
 
 

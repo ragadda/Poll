@@ -12,5 +12,4 @@ public interface AnswerRepository {
 
     public void deleteUserAnswerbyPollId(Integer userId, Integer pollId);
 
-
 }//endclass

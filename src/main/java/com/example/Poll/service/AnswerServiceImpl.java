@@ -13,12 +13,13 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Autowired
     private PollServiceImpl pollService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private AnswerRepositoryImpl answerRepository;
 
-    @Autowired
-    private UserService userService;
+
 
     @Override
     public void chooseAnswer(AnswerNumber answerNumber, Integer userId, Integer pollId) {
@@ -41,12 +42,14 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void deleteAllUserAnswers(Integer userId) {
-        //צריך לבדוק אם היוזר קיים
-        answerRepository.deleteAllUserAnswers(userId);
+        if(userService.getUserByUserId(userId)!=null) {
+            answerRepository.deleteAllUserAnswers(userId);
+        }
     }
 
     @Override
     public void deleteUserAnswerbyPollId(Integer userId, Integer pollId) {
         answerRepository.deleteUserAnswerbyPollId(userId,pollId);
     }
+
 }//endclass
