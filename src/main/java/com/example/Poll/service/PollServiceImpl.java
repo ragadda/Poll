@@ -108,17 +108,8 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public List<UserQuestionsResponse> getUserAnswer(Integer userId) {
-        List<Poll> userPolls=pollRepository.getAllPollsByUserId(userId);
-        List<UserQuestionsResponse> userQuestionsResponses=new ArrayList<>();
-        userPolls.forEach(poll -> {
-            Integer pollId=poll.getPollId();
-            String answer= pollRepository.getUserAnswer(userId,pollId);
-            UserQuestionsResponse userQuestionsResponse=new UserQuestionsResponse(userId,pollId,answer);
-            userQuestionsResponses.add(userQuestionsResponse);
-        });
-
-        return userQuestionsResponses;
+    public  List<UserQuestionsResponse> getUserAnswer(Integer userId) {
+        return  pollRepository.getUserAnswer(userId);
     }
 
     @Override

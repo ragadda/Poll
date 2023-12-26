@@ -25,6 +25,6 @@ public interface PollService {
     public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId);//Return how many users answer to this question in total
     public QuestionsNumberResponse getQuestionsNumberByUserId(Integer userId);//Return how many questions this user answered to
     public List<QuestionResponse>  getAllPollsAndUsersNumber();//Return all questions and for each question how many users chooseeach of the question options.
-    public List<UserQuestionsResponse> getUserAnswer(Integer userId) ;//Return the user answer to each question he submitted
+    public  List<UserQuestionsResponse> getUserAnswer(Integer userId) ;//Return the user answer to each question he submitted
 
 }//ensclass

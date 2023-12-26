@@ -25,6 +25,6 @@ public interface PollRepository {
     public Poll getPollByPollId(Integer pollId);
     public List<Poll> getAllPollsByUserId(Integer userId);
     public TotalQuestionAnswersResponse getTotalAnswersByPollId(Integer pollId);
-    public String getUserAnswer(Integer userId, Integer pollId);
+    public  List<UserQuestionsResponse> getUserAnswer(Integer userId);
 
 }//end class

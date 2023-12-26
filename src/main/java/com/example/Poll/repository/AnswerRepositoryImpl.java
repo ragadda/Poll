@@ -14,7 +14,7 @@ public class AnswerRepositoryImpl implements  AnswerRepository {
 
     @Override
     public void chooseAnswer(String answer, Integer userId, Integer pollId) {
-        String sql = "INSERT INTO " + Constant.ANSWER_TABLE_NAME + " (user_id,poll_id,answer) VALUES ( ?,?,?)";
+        String sql = "INSERT INTO " + Constant.ANSWER_TABLE_NAME + "(user_id,poll_id,answer) VALUES (?,?,?)";
         jdbcTemplate.update(sql, pollId,userId,answer);
     }
 

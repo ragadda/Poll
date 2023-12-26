@@ -14,4 +14,4 @@ spring:
       enabled: true
 
 user:
-  url: http://localhost:8082
+  url: http://localhost:8082/user

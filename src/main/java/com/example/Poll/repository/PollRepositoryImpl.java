@@ -1,10 +1,12 @@
 package com.example.Poll.repository;
 
 import com.example.Poll.model.Poll;
+import com.example.Poll.model.Response.QuestionResponse;
 import com.example.Poll.model.Response.TotalQuestionAnswersResponse;
 import com.example.Poll.model.Response.QuestionsNumberResponse;
 import com.example.Poll.model.Response.UserQuestionsResponse;
 import com.example.Poll.repository.mapper.PollMapper;
+import com.example.Poll.repository.mapper.UserQuestionMapper;
 import com.example.Poll.service.AnswerServiceImpl;
 import com.example.Poll.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,10 +105,9 @@ public class PollRepositoryImpl implements PollRepository {
 
 
     @Override
-    public String getUserAnswer(Integer userId, Integer poll_id) {
-        //String sql = "SELECT answer FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ? AND poll_id = ?";
-        String sql = "SELECT answer FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ?";
-        return jdbcTemplate.queryForObject(sql,String.class,userId);
+    public List<UserQuestionsResponse> getUserAnswer(Integer userId) {
+        String sql = "SELECT * FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ?";
+        return jdbcTemplate.query(sql,new UserQuestionMapper(),userId);
     }
 
 
