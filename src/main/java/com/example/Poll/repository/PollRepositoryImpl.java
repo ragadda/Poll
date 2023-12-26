@@ -10,6 +10,7 @@ import com.example.Poll.repository.mapper.UserQuestionMapper;
 import com.example.Poll.service.AnswerServiceImpl;
 import com.example.Poll.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -81,8 +82,12 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Override
     public Poll getPollByPollId(Integer pollId) {
-        String sql = "SELECT * FROM "+ Constant.POLL_TABLE_NAME +" WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql,new PollMapper(),pollId);
+        try {
+            String sql = "SELECT * FROM " + Constant.POLL_TABLE_NAME + " WHERE id = ?";
+            return jdbcTemplate.queryForObject(sql, new PollMapper(), pollId);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
 
