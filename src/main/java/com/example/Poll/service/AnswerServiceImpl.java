@@ -42,9 +42,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public void deleteAllUserAnswers(Integer userId) {
-        if(userService.getUserByUserId(userId)!=null) {
             answerRepository.deleteAllUserAnswers(userId);
-        }
     }
 
     @Override

@@ -111,8 +111,12 @@ public class PollRepositoryImpl implements PollRepository {
 
     @Override
     public List<UserQuestionsResponse> getUserAnswer(Integer userId) {
-        String sql = "SELECT * FROM "+ Constant.ANSWER_TABLE_NAME + " WHERE user_id = ?";
-        return jdbcTemplate.query(sql,new UserQuestionMapper(),userId);
+        try {
+            String sql = "SELECT * FROM " + Constant.ANSWER_TABLE_NAME + " WHERE user_id = ?";
+            return jdbcTemplate.query(sql, new UserQuestionMapper(), userId);
+        }catch (EmptyResultDataAccessException e){
+            return  null;
+        }
     }
 
 

@@ -23,7 +23,7 @@ public class AnswerController {
         answerService.updateAnswer(answerNumber,userId,pollId);
     }
 
-    @DeleteMapping(value = "/delete_all_answers")
+    @DeleteMapping(value ="/delete_all_answers")
     public void deleteAllUserAnswers(@RequestParam(value = "user_id") Integer userId){
         answerService.deleteAllUserAnswers(userId);
     }
